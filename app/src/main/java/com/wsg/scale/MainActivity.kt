@@ -3,6 +3,7 @@ package com.wsg.scale
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.wsg.scale.adapter.ScaleAdapter
 import com.wsg.scale.bean.Empty
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         recyclerView = findViewById(R.id.scaleRv)
         recyclerView?.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerView)
 
         adapter = ScaleAdapter()
         recyclerView?.adapter = adapter
