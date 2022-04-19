@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wsg.scale.adapter.ScaleAdapter
 import com.wsg.scale.bean.Empty
 import com.wsg.scale.bean.Scale
+import com.wsg.scale.bean.ScaleHalf
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +41,15 @@ class MainActivity : AppCompatActivity() {
                     val childView = snapHelper.findSnapView(layoutManager)
                     childView?.apply {
                         val position = recyclerView.getChildAdapterPosition(this)
-                        val scrollScale = (adapter?.items?.get(position) as? Scale)?.scale
-                        textView?.text = "当前滑动到 $scrollScale"
+
+                        when(adapter?.items?.get(position)) {
+                            is Scale -> {
+                                textView?.text = "当前滑动到 ${((adapter?.items?.get(position) as? Scale)?.scale)}"
+                            }
+                            is ScaleHalf -> {
+                                textView?.text = "当前滑动到 ${((adapter?.items?.get(position) as? ScaleHalf)?.scale)}"
+                            }
+                        }
                     }
                 }
             }
@@ -58,6 +66,11 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..100) {
             list.add(Scale(i))
+            if (i != 100) {
+                for (j in 1..9) {
+                    list.add(ScaleHalf(j / 10f + i))
+                }
+            }
         }
 
         list.add(Empty(width / 2, height))

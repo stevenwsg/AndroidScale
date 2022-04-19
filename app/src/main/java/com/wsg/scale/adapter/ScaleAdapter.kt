@@ -2,7 +2,9 @@ package com.wsg.scale.adapter
 
 import com.wsg.scale.bean.Empty
 import com.wsg.scale.bean.Scale
+import com.wsg.scale.bean.ScaleHalf
 import com.wsg.scale.holder.EmptyViewBinder
+import com.wsg.scale.holder.ScaleHalfViewBinder
 import com.wsg.scale.holder.ScaleViewBinder
 import me.drakeet.multitype.MultiTypeAdapter
 
@@ -15,5 +17,6 @@ class ScaleAdapter : MultiTypeAdapter() {
     init {
         register(Scale::class.java, ScaleViewBinder())
         register(Empty::class.java, EmptyViewBinder())
+        register(ScaleHalf::class.java, ScaleHalfViewBinder())
     }
 }
